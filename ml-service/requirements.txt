@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pandas
+scikit-learn
+joblib
+openpyxl
+python-multipart
+matplotlib
+seaborn
+transformers
+sentence-transformers
+torch

@@ -1,0 +1,3 @@
+model,feature_mode,macro_f1,accuracy,tie_breaker
+Embedding_LogisticRegression,embedding,1.0,1.0,1
+TFIDF_LogisticRegression,counts,1.0,1.0,0

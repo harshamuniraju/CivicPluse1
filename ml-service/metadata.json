@@ -1,0 +1,29 @@
+{
+  "best_model": "LogisticRegression",
+  "feature_mode": "counts",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "label_map": {
+    "0": "negative",
+    "1": "positive",
+    "2": "neutral"
+  },
+  "selection_metric": "macro_f1",
+  "validation": {
+    "counts": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    "embedding": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    }
+  },
+  "test": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0
+  },
+  "artifacts": {
+    "counts_model": "model.joblib",
+    "vectorizer": "vectorizer.joblib"
+  }
+}

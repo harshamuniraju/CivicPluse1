@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; width: 100%; }
+body { @apply bg-slate-900 text-gray-100; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+.badge-positive { @apply bg-cyan-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
+.badge-negative { @apply bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
+.badge-neutral { @apply bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
+
+.stat-card { @apply bg-slate-800 border border-slate-700 rounded-lg p-6 text-center; }
+.stat-value { @apply text-4xl font-bold text-cyan-400; }
+.stat-label { @apply text-slate-400 text-sm uppercase tracking-wide mt-2; }
+
+.complaint-card { @apply bg-slate-800 border-l-4 border-slate-700 rounded-lg p-4 mb-3 hover:bg-slate-750 transition; }
+.complaint-card.positive { @apply border-l-cyan-500; }
+.complaint-card.negative { @apply border-l-red-500; }
+.complaint-card.neutral { @apply border-l-purple-500; }
