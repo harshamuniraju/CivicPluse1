@@ -57,9 +57,9 @@ export default function ComplaintForm(){
   }
   
   return (
-    <form onSubmit={submit} className="space-y-4 bg-slate-800 border border-slate-700 p-6 rounded-lg">
+    <form onSubmit={submit} className="space-y-4 bg-white border border-slate-200 shadow-sm p-6 rounded-2xl">
       <div>
-        <label className="block text-sm uppercase tracking-wide text-slate-400 mb-2">City / District</label>
+        <label className="block text-sm uppercase tracking-wide text-slate-500 mb-2">City / District</label>
         <select
           value={city}
           onChange={e => {
@@ -67,7 +67,7 @@ export default function ComplaintForm(){
             setArea('')
           }}
           required
-          className="w-full bg-slate-700 border border-slate-600 text-slate-100 rounded px-4 py-2 focus:outline-none focus:border-cyan-400"
+          className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2 focus:outline-none focus:border-blue-400"
         >
           <option value="">Select city...</option>
           {cityOptions.map((option) => (
@@ -77,13 +77,13 @@ export default function ComplaintForm(){
       </div>
       
       <div>
-        <label className="block text-sm uppercase tracking-wide text-slate-400 mb-2">Ward / Area</label>
+        <label className="block text-sm uppercase tracking-wide text-slate-500 mb-2">Ward / Area</label>
         <select
           value={area}
           onChange={e=>setArea(e.target.value)}
           required
           disabled={!city}
-          className="w-full bg-slate-700 border border-slate-600 text-slate-100 rounded px-4 py-2 focus:outline-none focus:border-cyan-400 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2 focus:outline-none focus:border-blue-400 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <option value="">Select area...</option>
           {wardOptions.map((option) => (
@@ -93,12 +93,12 @@ export default function ComplaintForm(){
       </div>
       
       <div>
-        <label className="block text-sm uppercase tracking-wide text-slate-400 mb-2">Category</label>
+        <label className="block text-sm uppercase tracking-wide text-slate-500 mb-2">Category</label>
         <select
           value={category}
           onChange={e=>setCategory(e.target.value)}
           required
-          className="w-full bg-slate-700 border border-slate-600 text-slate-100 rounded px-4 py-2 focus:outline-none focus:border-cyan-400"
+          className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2 focus:outline-none focus:border-blue-400"
         >
           <option value="">Select category...</option>
           {categoryOptions.map((option) => (
@@ -108,26 +108,26 @@ export default function ComplaintForm(){
       </div>
       
       <div>
-        <label className="block text-sm uppercase tracking-wide text-slate-400 mb-2">Complaint Details</label>
+        <label className="block text-sm uppercase tracking-wide text-slate-500 mb-2">Complaint Details</label>
         <textarea 
           value={text} 
           onChange={e=>setText(e.target.value)} 
           placeholder="Describe the issue..." 
-          className="w-full bg-slate-700 border border-slate-600 text-slate-100 rounded px-4 py-2 focus:outline-none focus:border-cyan-400 resize-none" 
+          className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-4 py-2 focus:outline-none focus:border-blue-400 resize-none" 
           rows={6}
           required
         />
       </div>
       
       <div className="pt-2">
-        <button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-semibold uppercase tracking-wide rounded py-3 transition">
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold uppercase tracking-wide rounded-xl py-3 transition shadow-sm">
           Submit Complaint
         </button>
         {status && (
           <div className={`mt-3 p-3 rounded text-center text-sm ${
-            status === 'sending' ? 'bg-slate-700 text-slate-300' :
-            status === 'sent' ? 'bg-green-900 text-green-200' :
-            'bg-red-900 text-red-200'
+            status === 'sending' ? 'bg-slate-100 text-slate-600' :
+            status === 'sent' ? 'bg-emerald-100 text-emerald-700' :
+            'bg-rose-100 text-rose-700'
           }`}>
             {status === 'sending' ? '⏳ Submitting...' : 
              status === 'sent' ? '✓ Submitted successfully!' :

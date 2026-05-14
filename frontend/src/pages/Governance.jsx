@@ -28,36 +28,36 @@ export default function Governance(){
     <div>
       <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="stat-card">
-          <div className="stat-value text-cyan-400">{stats.positive}</div>
+          <div className="stat-value text-blue-600">{stats.positive}</div>
           <div className="stat-label">Positive</div>
         </div>
         <div className="stat-card">
-          <div className="stat-value text-red-400">{stats.negative}</div>
+          <div className="stat-value text-rose-500">{stats.negative}</div>
           <div className="stat-label">Negative</div>
         </div>
         <div className="stat-card">
-          <div className="stat-value text-purple-400">{stats.neutral}</div>
+          <div className="stat-value text-blue-400">{stats.neutral}</div>
           <div className="stat-label">Neutral</div>
         </div>
         <div className="stat-card">
-          <div className="stat-value text-slate-400">{stats.total}</div>
+          <div className="stat-value text-blue-400">{stats.total}</div>
           <div className="stat-label">Total Records</div>
         </div>
       </div>
       
       <div className="grid grid-cols-3 gap-8">
         <div className="col-span-1">
-          <h2 className="text-xl font-bold text-cyan-400 uppercase tracking-wide mb-6 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-blue-600 uppercase tracking-wide mb-6 flex items-center gap-2">
             📋 <span>Submit Complaint</span>
           </h2>
           <ComplaintForm />
         </div>
         <div className="col-span-2">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-cyan-400 uppercase tracking-wide flex items-center gap-2">
+            <h2 className="text-xl font-bold text-blue-600 uppercase tracking-wide flex items-center gap-2">
               💬 <span>Complaint Feed</span>
             </h2>
-            <span className="text-slate-400 text-sm">{stats.total} records</span>
+            <span className="text-slate-500 text-sm">{stats.total} records</span>
           </div>
           <LiveFeed />
         </div>

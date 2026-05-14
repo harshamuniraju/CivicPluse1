@@ -25,9 +25,9 @@ function formatStatus(status) {
 }
 
 function statusClasses(status) {
-  if (status === 'resolved') return 'bg-emerald-500/20 border-emerald-500 text-emerald-300'
-  if (status === 'in_progress') return 'bg-amber-500/20 border-amber-500 text-amber-300'
-  return 'bg-rose-500/20 border-rose-500 text-rose-300'
+  if (status === 'resolved') return 'bg-emerald-50 border-emerald-300 text-emerald-700'
+  if (status === 'in_progress') return 'bg-amber-50 border-amber-300 text-amber-700'
+  return 'bg-rose-50 border-rose-300 text-rose-700'
 }
 
 export default function Admin() {
@@ -73,27 +73,27 @@ export default function Admin() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-800 border border-slate-700 rounded-xl px-6 py-5">
-        <h1 className="text-2xl font-bold text-cyan-400 uppercase tracking-[0.14em]">Admin Complaint Desk</h1>
-        <p className="text-slate-400 mt-2">Set each complaint status as Yet to be Solved, In Progress, or Resolved.</p>
+      <div className="bg-white border border-slate-200 shadow-sm rounded-2xl px-6 py-5">
+        <h1 className="text-2xl font-bold text-blue-600 uppercase tracking-[0.14em]">Admin Complaint Desk</h1>
+        <p className="text-slate-500 mt-2">Set each complaint status as Yet to be Solved, In Progress, or Resolved.</p>
       </div>
 
       {loading ? (
-        <div className="text-slate-400">Loading complaints...</div>
+        <div className="text-slate-500">Loading complaints...</div>
       ) : (
         <div className="space-y-4">
           {filteredItems.length === 0 ? (
-            <div className="bg-slate-800 border border-slate-700 rounded-lg px-5 py-6 text-slate-400">No complaints found.</div>
+            <div className="bg-white border border-slate-200 shadow-sm rounded-2xl px-5 py-6 text-slate-500">No complaints found.</div>
           ) : (
             filteredItems.map((item) => (
-              <article key={item._id} className="bg-slate-800 border border-slate-700 rounded-xl p-5">
+              <article key={item._id} className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="min-w-0">
-                    <p className="text-slate-300 text-sm">
+                    <p className="text-slate-500 text-sm">
                       {item.City_or_District || 'City'} - {item.Area || 'Area'} - {new Date(item.createdAt).toLocaleString()}
                     </p>
-                    <h2 className="text-slate-100 text-lg mt-3 break-words">{item.text}</h2>
-                    <p className="text-slate-400 text-sm mt-3">Category: {item.Category || 'General'}</p>
+                    <h2 className="text-slate-800 text-lg mt-3 break-words">{item.text}</h2>
+                    <p className="text-slate-500 text-sm mt-3">Category: {item.Category || 'General'}</p>
                   </div>
 
                   <div className="flex flex-col gap-3 lg:items-end">
@@ -111,8 +111,8 @@ export default function Admin() {
                             onClick={() => updateStatus(item._id, option.key)}
                             className={`px-3 py-2 rounded-md text-sm border transition ${
                               active
-                                ? 'bg-cyan-500 border-cyan-400 text-white'
-                                : 'bg-slate-900 border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-300'
+                                ? 'bg-blue-600 border-blue-600 text-white'
+                                : 'bg-white border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600'
                             } ${savingId === item._id ? 'opacity-60 cursor-not-allowed' : ''}`}
                           >
                             {option.label}

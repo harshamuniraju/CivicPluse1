@@ -3,17 +3,120 @@
 @tailwind utilities;
 
 html, body, #root { height: 100%; width: 100%; }
-body { @apply bg-slate-900 text-gray-100; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+:root {
+  color-scheme: light;
+}
 
-.badge-positive { @apply bg-cyan-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
-.badge-negative { @apply bg-red-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
-.badge-neutral { @apply bg-purple-500 text-white px-3 py-1 rounded-md text-sm font-medium; }
+body {
+  @apply bg-slate-50 text-slate-900;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
-.stat-card { @apply bg-slate-800 border border-slate-700 rounded-lg p-6 text-center; }
-.stat-value { @apply text-4xl font-bold text-cyan-400; }
-.stat-label { @apply text-slate-400 text-sm uppercase tracking-wide mt-2; }
+body.theme-dark {
+  color-scheme: dark;
+  background: #0f172a;
+  color: #e2e8f0;
+}
 
-.complaint-card { @apply bg-slate-800 border-l-4 border-slate-700 rounded-lg p-4 mb-3 hover:bg-slate-750 transition; }
-.complaint-card.positive { @apply border-l-cyan-500; }
-.complaint-card.negative { @apply border-l-red-500; }
-.complaint-card.neutral { @apply border-l-purple-500; }
+.badge-positive { @apply bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1 rounded-md text-sm font-semibold; }
+.badge-negative { @apply bg-rose-100 text-rose-700 border border-rose-200 px-3 py-1 rounded-md text-sm font-semibold; }
+.badge-neutral { @apply bg-slate-100 text-slate-600 border border-slate-200 px-3 py-1 rounded-md text-sm font-semibold; }
+
+.stat-card { @apply bg-white border border-slate-200 shadow-sm rounded-2xl p-6 text-center; }
+.stat-value { @apply text-4xl font-bold text-blue-600; }
+.stat-label { @apply text-slate-500 text-sm uppercase tracking-[0.18em] mt-2; }
+
+.complaint-card { @apply bg-white border border-slate-200 border-l-4 rounded-2xl p-4 mb-3 shadow-sm hover:shadow-md transition; }
+.complaint-card.positive { @apply border-l-blue-600; }
+.complaint-card.negative { @apply border-l-rose-500; }
+.complaint-card.neutral { @apply border-l-blue-400; }
+
+.theme-dark .app-header,
+.theme-dark .app-nav,
+.theme-dark .stat-card,
+.theme-dark .complaint-card,
+.theme-dark form,
+.theme-dark section,
+.theme-dark article,
+.theme-dark table,
+.theme-dark .theme-surface {
+  background: #111827 !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-dark .theme-toggle {
+  background: #111827 !important;
+  border-color: #334155 !important;
+  color: #60a5fa !important;
+}
+
+.theme-dark .theme-toggle:hover {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.theme-dark input,
+.theme-dark select,
+.theme-dark textarea,
+.theme-dark button:not(.theme-toggle) {
+  border-color: #334155 !important;
+}
+
+.theme-dark input,
+.theme-dark select,
+.theme-dark textarea {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+.theme-dark button:not(.theme-toggle) {
+  color: inherit;
+}
+
+.theme-dark .stat-label,
+.theme-dark .text-slate-500,
+.theme-dark .text-slate-600,
+.theme-dark .text-slate-700 {
+  color: #94a3b8 !important;
+}
+
+.theme-dark .text-slate-800,
+.theme-dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+.theme-dark .bg-slate-50,
+.theme-dark .bg-blue-100,
+.theme-dark .bg-white {
+  background: #111827 !important;
+}
+
+.theme-dark .border-slate-200,
+.theme-dark .border-blue-100 {
+  border-color: #334155 !important;
+}
+
+.theme-dark .text-blue-600,
+.theme-dark .text-blue-700,
+.theme-dark .text-blue-400 {
+  color: #60a5fa !important;
+}
+
+.theme-dark .badge-positive {
+  background: rgba(37, 99, 235, 0.18) !important;
+  border-color: rgba(96, 165, 250, 0.5) !important;
+  color: #93c5fd !important;
+}
+
+.theme-dark .badge-negative {
+  background: rgba(244, 63, 94, 0.18) !important;
+  border-color: rgba(251, 113, 133, 0.4) !important;
+  color: #fda4af !important;
+}
+
+.theme-dark .badge-neutral {
+  background: rgba(100, 116, 139, 0.22) !important;
+  border-color: rgba(148, 163, 184, 0.35) !important;
+  color: #cbd5e1 !important;
+}

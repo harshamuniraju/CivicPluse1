@@ -1,32 +1,43 @@
-# CivicPulse
+# CivicPluse
 
-CivicPulse is a full-stack civic complaint analytics platform. It allows users to submit public service complaints, stores them in a backend service, classifies the sentiment of each complaint through a machine learning API, and visualizes complaint trends and regional rankings in a React dashboard.
+CivicPluse is a civic complaint management and analytics platform built as a full-stack project. Citizens can submit complaints, the system predicts complaint sentiment through an ML service, and administrators can review complaints, update workflow status, and monitor governance insights through dedicated dashboards.
 
-The project is organized as three services:
+## What The Project Does
 
-- `frontend`: React dashboard built with Vite and Tailwind CSS
-- `backend`: Node.js and Express API with MongoDB and Socket.IO
-- `ml-service`: FastAPI sentiment analysis service built in Python
+The project has two main goals:
 
-## Core Features
+- collect and store civic complaints with city, area, and category details
+- analyze complaint sentiment and present live governance insights
 
-- Submit civic complaints with city, area, and category details
-- Predict complaint sentiment as `positive`, `negative`, or `neutral`
-- Store complaint records in MongoDB
-- Stream new complaints in real time using Socket.IO
-- Visualize complaints, rankings, and governance indicators in the frontend
-- Train and compare two text-feature pipelines for sentiment classification
+It also includes an admin workflow so complaints can be marked as:
 
-## Project Architecture
+- `Yet to be Solved`
+- `In Progress`
+- `Resolved`
 
-1. A user submits a complaint from the frontend.
-2. The backend receives the request and forwards the complaint text to the ML service.
-3. The ML service predicts the sentiment label.
-4. The backend stores the complaint and predicted sentiment in MongoDB.
-5. The backend emits a real-time event through Socket.IO.
-6. The frontend updates dashboards, rankings, and complaint views.
+## Main Features
 
-## Tools And Technologies Used
+- complaint submission form for civic issues
+- live complaint feed with sentiment labels
+- AI insights page with sentiment and category charts
+- rankings page that updates in real time as new complaints arrive
+- admin page at `http://localhost:3000/admin`
+- complaint status management for negative and neutral complaints
+- MongoDB storage for complaint records
+- ML-based sentiment prediction for complaint text
+
+## Project Structure
+
+The repository is divided into three services:
+
+- `frontend/`
+  React dashboard built with Vite and Tailwind CSS
+- `backend/`
+  Express and MongoDB API with Socket.IO for real-time updates
+- `ml-service/`
+  FastAPI sentiment prediction service in Python
+
+## Tech Stack
 
 ### Frontend
 
@@ -61,104 +72,131 @@ The project is organized as three services:
 - joblib
 - openpyxl
 
-## Machine Learning Model
+## How The System Works
 
-The ML service performs sentiment classification on complaint text.
+1. A user submits a complaint from the frontend.
+2. The backend receives the complaint and sends the complaint text to the ML service.
+3. The ML service predicts sentiment as `negative`, `positive`, or `neutral`.
+4. The backend stores the complaint in MongoDB with sentiment and status.
+5. The backend emits live Socket.IO events to connected clients.
+6. The frontend dashboards and admin page update in real time.
 
-Models used:
+## ML Model Details
+
+The ML service is a sentiment classification pipeline for civic complaint text.
+
+Current model configuration from [metadata.json](C:\Users\harsh\OneDrive\Desktop\CivicPluse\ml-service\metadata.json):
+
+- classifier: `LogisticRegression`
+- feature mode: `counts`
+- embedding model supported in training: `all-MiniLM-L6-v2`
+
+The training script compares:
 
 - `TF-IDF + LogisticRegression`
 - `SentenceTransformer embeddings + LogisticRegression`
 
-Current training logic compares both pipelines and selects the better one using macro F1 score. The current metadata indicates that the active serving mode is embedding-based sentiment classification using:
+At the moment, the active serving mode is `counts`, which means the service is using TF-IDF style text features with Logistic Regression for prediction.
 
-- `all-MiniLM-L6-v2` for sentence embeddings
-- `LogisticRegression` as the final classifier
+## Admin Workflow
 
-The service also includes a fallback mechanism:
+The admin page is available at:
 
-- If the embedding stack fails at runtime, the API can fall back to the TF-IDF pipeline when fallback artifacts are available.
+- `http://localhost:3000/admin`
 
-## Folder Structure
+The admin interface:
 
-```text
-CivicPluse/
-|-- frontend/
-|-- backend/
-|-- ml-service/
-|   |-- app/
-|   |-- train.py
-|   |-- metadata.json
-|   |-- run.bat
-|   |-- train.bat
-|-- CivicPulse_Train.xlsx
-|-- CivicPulse_Test.xlsx
-|-- run-ml.ps1
-|-- start.ps1
-|-- start.sh
-|-- stop.sh
-```
+- shows complaints from the backend
+- filters the list to negative and neutral complaints
+- lets the admin update complaint status
+- receives real-time updates when new complaints are created or statuses change
 
-## How To Run
+## Important API Endpoints
+
+### Backend
+
+- `POST /api/complaints`
+  create a complaint
+- `GET /api/complaints`
+  fetch complaint feed data
+- `GET /api/options`
+  fetch city, ward, and category options
+- `GET /api/admin/complaints`
+  fetch admin complaint list
+- `PATCH /api/admin/complaints/:id/status`
+  update complaint status
 
 ### ML Service
 
-From `ml-service`:
+- `POST /predict`
+  predict sentiment for complaint text
+
+## Run Instructions
+
+### Windows
+
+Start the ML service from `ml-service`:
 
 ```powershell
 .\run.bat
 ```
 
-### Train The ML Model
-
-From `ml-service`:
+Train the ML model from `ml-service`:
 
 ```powershell
 .\train.bat
 ```
 
-### Start All Services On Windows
-
-From the project root:
+Start all major services from the project root:
 
 ```powershell
 .\start.ps1
 ```
 
-This starts:
+### Manual Service Start
 
-- Frontend on `http://localhost:3000`
-- Backend on its configured port
-- ML service on `http://localhost:8001`
+Frontend:
 
-## Backend API Overview
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-Main endpoints:
+Backend:
 
-- `POST /api/complaints` to create a complaint
-- `GET /api/complaints` to fetch stored and dataset complaints
-- `GET /api/options` to fetch city, ward, and category options
-- `POST /predict` in the ML service to classify complaint sentiment
+```powershell
+cd backend
+npm install
+npm run dev
+```
 
-## Data Used
+ML service:
 
-The project includes Excel datasets for model development:
+```powershell
+cd ml-service
+.\run.bat
+```
+
+## Default Local URLs
+
+- frontend: `http://localhost:3000`
+- admin page: `http://localhost:3000/admin`
+- backend: `http://localhost:4000` or your configured backend port
+- ML service: `http://localhost:8001`
+
+## Dataset Files
+
+The repository includes training and testing spreadsheets:
 
 - `CivicPulse_Train.xlsx`
 - `CivicPulse_Test.xlsx`
 
-These datasets are used by `ml-service/train.py` to train, validate, and test the sentiment model.
-
-## Real-Time Communication
-
-The backend uses Socket.IO to broadcast newly created complaints. This allows the frontend dashboard to update without requiring manual refresh.
-
-## Use Case
-
-CivicPulse is designed for civic governance monitoring. It can help identify complaint-heavy regions, understand public sentiment toward services, and provide a live dashboard for administrators or citizens tracking issue patterns.
+These are used by [train.py](C:\Users\harsh\OneDrive\Desktop\CivicPluse\ml-service\train.py) to train and evaluate the sentiment model.
 
 ## Notes
 
-- The project currently uses local files and a local MongoDB instance.
-- The ML service is designed to be resilient to embedding dependency issues through fallback logic.
-- For stable execution, use the provided runner scripts instead of relying on a global Python installation.
+- MongoDB is expected to run locally at `mongodb://127.0.0.1:27017/civicpulse` unless changed through environment configuration.
+- The frontend receives real-time complaint updates through Socket.IO.
+- The rankings page merges city aliases such as `Bangalore` into `Bengaluru`.
+- The admin page is intended for workflow management, not just analytics.

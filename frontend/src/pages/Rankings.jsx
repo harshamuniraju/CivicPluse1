@@ -15,11 +15,9 @@ function normalizeSentiment(value) {
 function normalizeCityName(value) {
   const city = String(value || '').trim()
   if (!city) return 'Unknown'
-
   const normalized = city.toLowerCase()
   if (normalized === 'bangalore') return 'Bengaluru'
   if (normalized === 'bengaluru urban') return 'Bengaluru'
-
   return city
 }
 
@@ -76,65 +74,65 @@ export default function Rankings() {
   }
 
   return (
-    <div className="min-h-[70vh] bg-[#020f2c] border border-[#103057] rounded-lg overflow-hidden">
-      <div className="px-6 py-5 border-b border-[#14345e] bg-gradient-to-r from-[#041739] to-[#02112d]">
+    <div className="min-h-[70vh] bg-white border border-slate-200 shadow-sm rounded-3xl overflow-hidden">
+      <div className="px-6 py-5 border-b border-slate-200 bg-blue-100">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-4xl font-black uppercase tracking-[0.18em] text-cyan-400">CivicPulse AI</h1>
+            <h1 className="text-4xl font-black uppercase tracking-[0.18em] text-blue-600">CivicPulse AI</h1>
             <p className="text-[0.95rem] uppercase tracking-[0.45em] text-slate-500 mt-2">Karnataka Civic Governance Intelligence Platform</p>
           </div>
-          <div className="self-start md:self-auto inline-flex items-center gap-3 px-4 py-2 border border-cyan-700 rounded-md bg-[#021937] text-cyan-300 text-sm uppercase tracking-[0.25em]">
+          <div className="self-start md:self-auto inline-flex items-center gap-3 px-4 py-2 border border-slate-200 rounded-xl bg-white text-blue-600 text-sm uppercase tracking-[0.25em] shadow-sm">
             {isRefreshing ? 'Updating' : 'Live'} · {data.length} Records
-            <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_12px_#22d3ee]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.45)]" />
           </div>
         </div>
       </div>
 
       <div className="px-6 py-8 space-y-10">
         <section>
-          <h2 className="text-[1.95rem] font-black uppercase tracking-[0.22em] text-cyan-300">Top Performers</h2>
-          <p className="text-slate-400 tracking-[0.25em] uppercase mt-3">Cities with governance score ≥ 55</p>
+          <h2 className="text-[1.95rem] font-black uppercase tracking-[0.22em] text-blue-600">Top Performers</h2>
+          <p className="text-slate-500 tracking-[0.25em] uppercase mt-3">Cities with governance score above 55</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
             {topPerformers.map((item, idx) => (
               <article
                 key={item.city}
-                className={`rounded-2xl border border-cyan-900 bg-gradient-to-br from-[#112445] to-[#1d2233] p-5 shadow-[0_0_0_1px_rgba(6,182,212,0.1)] transition duration-500 ${
-                  isRefreshing ? 'scale-[1.02] shadow-[0_0_30px_rgba(34,211,238,0.18)]' : ''
+                className={`rounded-3xl border border-blue-100 bg-blue-100 p-5 shadow-sm transition duration-500 ${
+                  isRefreshing ? 'scale-[1.02] shadow-lg' : ''
                 }`}
               >
-                <div className="text-cyan-300 uppercase tracking-[0.2em] font-semibold">#{idx + 1} Ranked</div>
-                <h3 className="text-3xl mt-3 font-black uppercase tracking-[0.12em] text-slate-100">{item.city}</h3>
-                <div className="text-6xl leading-none mt-4 font-black text-cyan-400">{Math.round(item.score)}</div>
+                <div className="text-blue-600 uppercase tracking-[0.2em] font-semibold">#{idx + 1} Ranked</div>
+                <h3 className="text-3xl mt-3 font-black uppercase tracking-[0.12em] text-slate-800">{item.city}</h3>
+                <div className="text-6xl leading-none mt-4 font-black text-blue-600">{Math.round(item.score)}</div>
                 <p className="text-slate-500 mt-4">{mlaName(item.city)}</p>
-                <p className="text-slate-300 mt-2 tracking-[0.08em]">{item.positive} positive · {item.negative} negative</p>
+                <p className="text-slate-700 mt-2 tracking-[0.08em]">{item.positive} positive · {item.negative} negative</p>
               </article>
             ))}
             {topPerformers.length === 0 && (
-              <div className="col-span-full rounded-xl border border-slate-700 bg-[#0a1a36] p-6 text-slate-300">No top performers yet.</div>
+              <div className="col-span-full rounded-2xl border border-slate-200 bg-slate-50 p-6 text-slate-500">No top performers yet.</div>
             )}
           </div>
         </section>
 
         <section>
-          <h2 className="text-[1.95rem] font-black uppercase tracking-[0.22em] text-rose-400">MLA of Shame</h2>
-          <p className="text-slate-400 tracking-[0.22em] uppercase mt-3">Worst performing regions - Citizens demand accountability</p>
+          <h2 className="text-[1.95rem] font-black uppercase tracking-[0.22em] text-rose-600">MLA of Shame</h2>
+          <p className="text-slate-500 tracking-[0.22em] uppercase mt-3">Worst performing regions - Citizens demand accountability</p>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
             {worstPerformers.map((item, idx) => (
               <article
                 key={item.city}
-                className={`rounded-2xl border border-rose-900 bg-gradient-to-br from-[#2f0513] to-[#220510] p-5 shadow-[0_0_0_1px_rgba(251,113,133,0.1)] transition duration-500 ${
-                  isRefreshing ? 'scale-[1.02] shadow-[0_0_30px_rgba(251,113,133,0.18)]' : ''
+                className={`rounded-3xl border border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-5 shadow-sm transition duration-500 ${
+                  isRefreshing ? 'scale-[1.02] shadow-lg' : ''
                 }`}
               >
-                <div className="text-rose-300 uppercase tracking-[0.16em] font-semibold">#{idx + 1} Worst Performer</div>
-                <h3 className="text-3xl mt-3 font-black uppercase tracking-[0.12em] text-slate-100">{item.city}</h3>
-                <div className="text-6xl leading-none mt-4 font-black text-rose-400">{Math.max(0, Math.round(item.score))}</div>
-                <p className="text-rose-300/70 mt-4">{mlaName(item.city)}</p>
-                <p className="text-rose-300 mt-2 tracking-[0.08em]">{item.negative} negative complaints</p>
+                <div className="text-rose-700 uppercase tracking-[0.16em] font-semibold">#{idx + 1} Worst Performer</div>
+                <h3 className="text-3xl mt-3 font-black uppercase tracking-[0.12em] text-slate-800">{item.city}</h3>
+                <div className="text-6xl leading-none mt-4 font-black text-rose-500">{Math.max(0, Math.round(item.score))}</div>
+                <p className="text-slate-500 mt-4">{mlaName(item.city)}</p>
+                <p className="text-rose-700 mt-2 tracking-[0.08em]">{item.negative} negative complaints</p>
               </article>
             ))}
             {worstPerformers.length === 0 && (
-              <div className="col-span-full rounded-xl border border-slate-700 bg-[#2a1220] p-6 text-slate-300">No records available.</div>
+              <div className="col-span-full rounded-2xl border border-slate-200 bg-slate-50 p-6 text-slate-500">No records available.</div>
             )}
           </div>
         </section>
@@ -142,9 +140,9 @@ export default function Rankings() {
 
       {rankedList.length > 0 && (
         <div className="px-6 pb-8">
-          <div className={`overflow-x-auto rounded-lg border border-slate-800 transition duration-500 ${isRefreshing ? 'ring-1 ring-cyan-500/40' : ''}`}>
+          <div className={`overflow-x-auto rounded-2xl border border-slate-200 bg-white transition duration-500 ${isRefreshing ? 'ring-2 ring-blue-100' : ''}`}>
             <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="bg-[#0c1e3f] text-slate-300 uppercase tracking-[0.12em]">
+              <thead className="bg-blue-100 text-slate-700 uppercase tracking-[0.12em]">
                 <tr>
                   <th className="px-4 py-3">City</th>
                   <th className="px-4 py-3">Score</th>
@@ -156,12 +154,12 @@ export default function Rankings() {
               </thead>
               <tbody>
                 {rankedList.map((item) => (
-                  <tr key={`table-${item.city}`} className="border-t border-slate-800 text-slate-200">
+                  <tr key={`table-${item.city}`} className="border-t border-slate-100 text-slate-700">
                     <td className="px-4 py-3 font-semibold">{item.city}</td>
                     <td className="px-4 py-3">{item.score}</td>
-                    <td className="px-4 py-3 text-cyan-400">{item.positive}</td>
-                    <td className="px-4 py-3 text-rose-400">{item.negative}</td>
-                    <td className="px-4 py-3 text-violet-400">{item.neutral}</td>
+                    <td className="px-4 py-3 text-blue-600">{item.positive}</td>
+                    <td className="px-4 py-3 text-rose-500">{item.negative}</td>
+                    <td className="px-4 py-3 text-blue-400">{item.neutral}</td>
                     <td className="px-4 py-3">{item.total}</td>
                   </tr>
                 ))}
@@ -171,7 +169,7 @@ export default function Rankings() {
         </div>
       )}
 
-      {rankedList.length === 0 && <div className="px-6 pb-8 text-slate-400">No data available yet.</div>}
+      {rankedList.length === 0 && <div className="px-6 pb-8 text-slate-500">No data available yet.</div>}
     </div>
   )
 }

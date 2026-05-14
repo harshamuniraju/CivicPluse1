@@ -39,8 +39,8 @@ export default function LiveFeed(){
           onClick={()=>setFilter('all')}
           className={`px-4 py-2 rounded font-semibold transition ${
             filter === 'all' 
-              ? 'bg-cyan-600 text-white' 
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-blue-600 text-white shadow-sm' 
+              : 'bg-white border border-slate-200 text-slate-600 hover:bg-blue-100'
           }`}
         >
           All
@@ -49,8 +49,8 @@ export default function LiveFeed(){
           onClick={()=>setFilter('positive')}
           className={`px-4 py-2 rounded font-semibold transition ${
             filter === 'positive' 
-              ? 'bg-cyan-500 text-white' 
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-blue-600 text-white shadow-sm' 
+              : 'bg-white border border-slate-200 text-slate-600 hover:bg-blue-100'
           }`}
         >
           ✓ Positive
@@ -59,8 +59,8 @@ export default function LiveFeed(){
           onClick={()=>setFilter('negative')}
           className={`px-4 py-2 rounded font-semibold transition ${
             filter === 'negative' 
-              ? 'bg-red-500 text-white' 
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-rose-500 text-white shadow-sm' 
+              : 'bg-white border border-slate-200 text-slate-600 hover:bg-rose-50'
           }`}
         >
           ✗ Negative
@@ -69,8 +69,8 @@ export default function LiveFeed(){
           onClick={()=>setFilter('neutral')}
           className={`px-4 py-2 rounded font-semibold transition ${
             filter === 'neutral' 
-              ? 'bg-purple-500 text-white' 
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-blue-400 text-white shadow-sm' 
+              : 'bg-white border border-slate-200 text-slate-600 hover:bg-blue-100'
           }`}
         >
           ◯ Neutral
@@ -79,7 +79,7 @@ export default function LiveFeed(){
       
       <div className="space-y-0 max-h-[calc(100vh-400px)] overflow-auto">
         {filteredItems.length === 0 ? (
-          <div className="text-center py-8 text-slate-400">No complaints yet</div>
+          <div className="text-center py-8 text-slate-500">No complaints yet</div>
         ) : (
           filteredItems.map(i => (
             <div key={i._id} className={`complaint-card ${getSentimentColor(i.sentiment)}`}>
@@ -87,7 +87,7 @@ export default function LiveFeed(){
                 <div className="text-xs text-slate-500">{i.City_or_District || 'City'} • {i.Area || 'Area'} • {new Date(i.createdAt).toLocaleDateString()}</div>
                 <span className={`badge-${getSentimentColor(i.sentiment)}`}>{getSentimentLabel(i.sentiment)}</span>
               </div>
-              <div className="text-sm text-slate-200 mb-2">{i.text}</div>
+              <div className="text-sm text-slate-800 mb-2">{i.text}</div>
               <div className="text-xs text-slate-500">{i.Category && `🏷️ ${i.Category}`}</div>
             </div>
           ))
